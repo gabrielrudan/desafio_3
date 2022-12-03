@@ -1,59 +1,60 @@
-import { useState } from 'react';
-import style from './style.module.scss';
+import { useState } from 'react'
+import style from './style.module.scss'
 
 export default function Home() {
+  const [name, setName] = useState('')
+  const [nameList, setNameList] = useState([])
+  const [error, setError] = useState('')
 
-  const [name, setName] = useState('');
-  const [nameList, setNameList] = useState([]);
-  const [error, setError] = useState('');
-
-  function handleAddNameInList(){
-    if(!name){
-      setError('Digite um nome primeiro...');
-      return;
+  function handleAddNameInList() {
+    if (!name) {
+      setError('Digite um nome primeiro...')
+      return
     }
 
-    const findName = nameList.findIndex((item) => item===name);
+    const findName = nameList.findIndex((item) => item === name)
 
-    if(findName !== -1){
+    if (findName !== -1) {
       setError('Esse nome já está na lista')
-      return;
+
+      return
     }
 
-    setNameList([...nameList, name]);
-    setName('');
-    setError('');
+    setNameList([...nameList, name])
+    setName('')
+    setError('')
   }
 
   return (
     <div className={style.container}>
       <div>
-      <h2>Inserindo nomes</h2>
-        <input type='text'
-        placeholder='Name'
-        id='input-name'
-        value={name}
-          onChange={(e)=> setName(e.target.value)}
+        <h2>Inserindo nomes</h2>
+        <input
+          type="text"
+          placeholder="Name"
+          id="input-name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <button
-        className={style.btnInsert}
-        onClick={() => handleAddNameInList()}
+          className={style.btnInsert}
+          onClick={() => handleAddNameInList()}
         >
           Adicionar
         </button>
-        <span id='same-error'>{error}</span>
+        <span id="same-error">{error}</span>
       </div>
       <div>
-        {nameList.length ?
+        {nameList.length ? (
           <ul>
             {nameList.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
-        :
-        <span id='empty-list'>Lista de Nomes Vazia...</span>
-        }
+        ) : (
+          <span id="empty-list">Lista de Nomes Vazia...</span>
+        )}
       </div>
     </div>
-  );
+  )
 }
