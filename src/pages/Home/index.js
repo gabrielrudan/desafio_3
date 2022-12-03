@@ -28,6 +28,17 @@ export default function Home() {
   return (
     <div className={style.container}>
       <div>
+        {nameList.length ? (
+          <ul>
+            {nameList.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <span id="empty-list">Lista de Nomes Vazia...</span>
+        )}
+      </div>
+      <div>
         <h2>Inserindo nomes</h2>
         <input
           type="text"
@@ -43,17 +54,6 @@ export default function Home() {
           Adicionar
         </button>
         <span id="same-error">{error}</span>
-      </div>
-      <div>
-        {nameList.length ? (
-          <ul>
-            {nameList.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        ) : (
-          <span id="empty-list">Lista de Nomes Vazia...</span>
-        )}
       </div>
     </div>
   )
